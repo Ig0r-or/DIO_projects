@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>brasilapi</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    label {git config --global user.email "you@example.com"
+        display: block;
+        margin-bottom: 10px;
+    }
+    input {
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    button {
+        padding: 5px 10px;
+    }
+    p {
+        margin-top: 10px;
+        color: blue;
+    }
+</style>
+<body>
+    <title>Cadastro</title>
+<input id="usuario_nome" placeholder="Qual seu nome?"><br>
+<input id="endereco_cep" onfocusout="buscarCEP()" placeholder="Qual seu CEP?"><br>
+<input id="endereco_rua" placeholder="Qual sua rua?"><br>
+<input id="endereco_bairro" placeholder="Qual sua bairro?"><br>
+<input id="endereco_cidade" placeholder="Qual sua cidade?"><br>
+<input id="endereco_estado" placeholder="Qual seu estado?"><br>
+
+
+<script>
+function buscarCEP(){
+let cep = document.getElementById("endereco_cep").value;
+let url = "https://brasilapi.com.br/api/cep/v1/"+cep;
+
+fetch(url).then(function(dados){
+    dados.json().then(function(endereco){
+        document.getElementById("endereco_rua").value = endereco.street;
+        document.getElementById("endereco_bairro").value = endereco.neighborhood;
+        document.getElementById("endereco_cidade").value = endereco.city;
+        document.getElementById("endereco_estado").value = endereco.state;
+    })
+})
+}
+</script>
+</body>
+</html>
